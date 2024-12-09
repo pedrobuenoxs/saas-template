@@ -127,7 +127,7 @@ async function fetchBlogFromDatabase(slug) {
     modifiedDate: new Date().toISOString(),
     image: "https://via.placeholder.com/1200x628.png?text=Blog+Image",
     tags: ["SEO", "Web Development", "JavaScript"],
-    canonicalUrl: `https://yourwebsite.com/blog/${slug}`,
+    canonicalUrl: `https://quantascaloriastem.com/blog/${slug}`,
   };
 }
 
