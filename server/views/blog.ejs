@@ -1,11 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta Tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="<%= cssFilePath %>">
   <meta name="description" content="<%= description %>">
+  <meta name="author" content="<%= blogData.author %>">
+  <meta name="keywords" content="<%= blogData.tags.join(', ') %>">
+  <title><%= title %></title>
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="<%= blogData.canonicalUrl %>">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="<%= description %>">
+  <meta property="og:url" content="<%= blogData.canonicalUrl %>">
+  <meta property="og:image" content="<%= blogData.image %>">
+  <meta property="og:site_name" content="Your Blog Name">
+  <meta property="article:author" content="<%= blogData.author %>">
+  <meta property="article:published_time" content="<%= blogData.publishedDate %>">
+  <meta property="article:tag" content="<%= blogData.tags.join(', ') %>">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description" content="<%= description %>">
+  <meta name="twitter:image" content="<%= blogData.image %>">
+  <meta name="twitter:site" content="@YourTwitterHandle">
+  <meta name="twitter:creator" content="@YourTwitterHandle">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "<%= title %>",
+    "image": "<%= blogData.image %>",
+    "author": {
+      "@type": "Person",
+      "name": "<%= blogData.author %>"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Your Blog Name",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://yourblog.com/logo.png"
+      }
+    },
+    "datePublished": "<%= blogData.publishedDate %>",
+    "dateModified": "<%= blogData.modifiedDate || blogData.publishedDate %>",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "<%= blogData.canonicalUrl %>"
+    },
+    "description": "<%= description %>"
+  }
+  </script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="<%= cssFilePath %>">
 </head>
 <body class="">
   <header>
@@ -19,6 +75,7 @@
     <script id="blog-data" type="application/json">
       <%= JSON.stringify(blogData) %>
     </script>
+  </main>
   <footer>
     <p>Blog Footer</p>
   </footer>

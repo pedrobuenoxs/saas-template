@@ -116,11 +116,18 @@ app.get("/blog/:slug", async (req, res) => {
   });
 });
 
+// Dummy data function to match the required fields in the template
 async function fetchBlogFromDatabase(slug) {
   return {
     title: `Blog Title for ${slug}`,
     description: `Description for blog ${slug}`,
     content: `This is the content of the blog post with slug ${slug}.`,
+    author: "John Doe",
+    publishedDate: new Date().toISOString(),
+    modifiedDate: new Date().toISOString(),
+    image: "https://via.placeholder.com/1200x628.png?text=Blog+Image",
+    tags: ["SEO", "Web Development", "JavaScript"],
+    canonicalUrl: `https://yourwebsite.com/blog/${slug}`,
   };
 }
 
