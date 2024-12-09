@@ -91,6 +91,41 @@ Allow: /
 Sitemap: https://my-pet.website/sitemap.xml`);
 });
 
+import ReactDOMServer from "react-dom/server";
+import React from "react";
+import BlogComponent from "./views/BlogComponent.js";
+
+app.get("/blog/:slug", async (req, res) => {
+  const slug = req.params.slug;
+
+  // Fetch blog data from your database or API
+  const blogData = await fetchBlogFromDatabase(slug);
+
+  // Render a React component to a string (optional)
+  const blogContent = ReactDOMServer.renderToString(
+    React.createElement(BlogComponent, { blogData })
+  );
+
+  // Pass data and React content to EJS
+  res.render("blog", {
+    title: blogData.title,
+    description: blogData.description,
+    content: blogContent,
+    cssFilePath: "/server.css",
+    blogData,
+  });
+});
+
+async function fetchBlogFromDatabase(slug) {
+  return {
+    title: `Blog Title for ${slug}`,
+    description: `Description for blog ${slug}`,
+    content: `This is the content of the blog post with slug ${slug}.`,
+  };
+}
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views")); // Adjust the views folder path
 app.use(express.static(buildPath, { maxAge: "1m" }));
 
 // Serve static files

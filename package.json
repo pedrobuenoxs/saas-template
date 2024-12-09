@@ -6,9 +6,10 @@
   "scripts": {
     "dev:client": "vite --host",
     "dev:server": "npx tsx server/index.ts",
-    "build": "npm run build:client  && npm run build:server",
+    "build": "npm run build:client  && npm run build:server &&  npm run build:server-css && cp ./server/views/blog.ejs ./build/views",
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.server.json --preserveWatchOutput",
+    "build:server-css": "npx tailwindcss -i ./server/tailwind.css -o ./build/server.css",
     "start:prod": "node build/index.js",
     "start:dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
   },
