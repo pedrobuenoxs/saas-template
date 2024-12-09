@@ -8,12 +8,17 @@ import { ThemeProvider } from "./subscriber/theme.subscriber";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login";
 import Blogs from "./pages/blogs";
+import LandingPage from "./pages/landing-page";
+import Blog from "./pages/blog";
 
 const router = createBrowserRouter([
   {
     element: <App />,
-    path: "/",
     children: [
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
       {
         path: "login",
         element: <Login />,
@@ -22,7 +27,17 @@ const router = createBrowserRouter([
         path: "blogs",
         element: <Blogs />,
       },
+
       { element: <NotFound />, path: "*" },
+    ],
+  },
+  {
+    element: <App />,
+    children: [
+      {
+        path: "/app",
+        element: <Blog />,
+      },
     ],
   },
 ]);

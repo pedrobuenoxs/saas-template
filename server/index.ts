@@ -21,7 +21,7 @@ app.use(limiter);
 // Initialize Supabase client
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import pageConfig from "./pageConfig";
+import pageConfig from "./pageConfig.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
